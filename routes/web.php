@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+Route::group(['middleware' => ['auth']], function () {
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.index');
+//Route::get('/tasks/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
+//Route::post('/tasks/store', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+//Route::post('/tasks/show', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+Route::resource('tasks', App\Http\Controllers\TaskController::class);
+
+
+
+});
