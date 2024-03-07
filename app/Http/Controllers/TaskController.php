@@ -45,6 +45,7 @@ class TaskController extends Controller
      */
     public function show(Task $task): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+//        dd($task);
         return view('tasks.show', compact('task'));
     }
 
@@ -53,18 +54,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+//        dd($task);
         $users = User::all();
-//        foreach ($users as $user){
-////            echo $user->id;
-////            echo $task->user_id;
-//            if ($user->id == $task->user_id){
-//                echo $user->id ;
-//                echo $task->user_id;
-//            }
-//        }
-
+//
 //        dd($users,$task);
-
 
         return view('tasks.edit', compact('task','users'));
     }
@@ -72,9 +65,20 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update( Request $request, Task $task)
     {
-        $task->update($request->all());
+//        dd($request);
+//        $task->update($request->all());
+        $task = Task::findOrFail($task->id);
+//dd($task);
+
+        // Update the task attributes
+        $task -> task =$request['task'];
+        $task -> status =$request['status'];
+        $task -> user_id =$request['user_id'];
+        // Add more attributes as needed
+        // Save the updated task
+        $task->save();
         return redirect()->route('tasks.index');
     }
 
@@ -83,6 +87,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+//        TODO change to soft delete
         $task->delete();
         return redirect()->route('tasks.index');
     }

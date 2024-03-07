@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <form action="{{ route('task.store') }}" method="POST">
+                    <form action="{{ route('tasks.store') }}" method="POST">
                     @csrf
                         <div class="form-group">
                             <label>Task :</label>

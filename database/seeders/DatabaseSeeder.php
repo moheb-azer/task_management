@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//         \App\Models\User::factory(10)->create();
+         \App\Models\User::factory(10)->create();
 //         \App\Models\Task::factory(100)->create();
 
 
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 //         ]);
          $faker = Faker::create();
         $statusValues = ['Todo', 'In progress', 'Done'];
-         foreach(range(1,30) as $index){
+         foreach(range(1,40) as $index){
              DB::table('tasks')->insert([
                  'task'=>$faker->text(100),
                  'status'=>$statusValues[rand(0,2)],
