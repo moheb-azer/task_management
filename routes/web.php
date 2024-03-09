@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Commentcontroller;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('tasks', TaskController::class);
+Route::resource('comments', CommentController::class);
 
 //Route::PUT('/test', [TaskController::class, 'update'])->name('test');
 
