@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,8 +46,9 @@ class TaskController extends Controller
      */
     public function show(Task $task): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-//        dd($task);
-        return view('tasks.show', compact('task'));
+        $comments = Comment::with('user')->where('task_id','=',$task->id)->get();
+//        dd($comments);
+        return view('tasks.show', compact('task','comments'));
     }
 
     /**
@@ -54,11 +56,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-//        dd($task);
         $users = User::all();
-//
-//        dd($users,$task);
-
         return view('tasks.edit', compact('task','users'));
     }
 
@@ -67,11 +65,7 @@ class TaskController extends Controller
      */
     public function update( Request $request, Task $task)
     {
-//        dd($request);
-//        $task->update($request->all());
         $task = Task::findOrFail($task->id);
-//dd($task);
-
         // Update the task attributes
         $task -> task =$request['task'];
         $task -> status =$request['status'];
@@ -87,7 +81,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-//        TODO change to soft delete
+        $task = Task::findOrFail($task->id);
         $task->delete();
         return redirect()->route('tasks.index');
     }
