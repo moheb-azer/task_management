@@ -23,36 +23,14 @@
                         </div>
                         <div class="form-group">
                             <lable>Assigned to :</lable>
-                                <input class="form-control" value="{{$task->users->name}}" disabled >
+                            <select class="form-select" name="user_id" disabled>
+
+                                <option selected value="" selected>{{$task->users->name}}</option>
+
+                            </select>
                         </div>
 
 
-                </div>
-
-                <div class="col-md-8">
-                    <h2>Comments</h2>
-                    @foreach($comments as $comment)
-                        <div class="card mb-1">
-                            <div class="card-body ">
-                                <h5 class="card-title">@ {{ $comment->user->name}}</h5>
-                                <p class="card-text">{{ $comment->comment }}</p>
-                                <p class="card-text">@if($comment->user->id == session('user_id'))test @endif</p>
-                                <p class="card-text"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
-                            </div>
-                        </div>
-                    @endforeach
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <form action="{{ route('comments.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="task_id" value="{{ $task->id }}">
-                                <div class="form-group">
-                                    <textarea class="form-control" name="comment" rows="2" placeholder="Add a new comment"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
