@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-=======
-use Illuminate\Http\Request;
->>>>>>> origin/master
 
 class Commentcontroller extends Controller
 {
@@ -31,23 +27,17 @@ class Commentcontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-<<<<<<< HEAD
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $user = Auth::user();
 //        dd($user);
         $comment = new Comment();
-        $comment -> task_id =$request['task_id'];
-        $comment -> comment =$request['comment'];
-        $comment -> user_id =$user->id;
+        $comment->task_id =$request['task_id'];
+        $comment->comment =$request['comment'];
+        $comment->user_id =$user->id;
 //        dd($comment);
         $comment->save();
         return redirect()->route('tasks.show',[$request['task_id']]);
-=======
-    public function store(Request $request)
-    {
-        //
->>>>>>> origin/master
     }
 
     /**

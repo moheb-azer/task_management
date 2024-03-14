@@ -12,11 +12,38 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $tasks = Task::with('users')->paginate(10);
+//        dd($request->user_id);
+        $users = User::all();
+        $taskDesc ="";
+        $tasks = Task::with('users');
+        if ($request->has('task')) {
+            $taskDesc = $request->input('task');
+            if ($taskDesc !== null){
+                $tasks->where('task', 'like', '%' . $taskDesc . '%');
+            }
+        }
 //        dd($tasks);
-        return view('tasks.index', compact('tasks'));
+        $userId='';
+        if ($request->has('user_id')) {
+            $userId = $request->input('user_id');
+            if ($userId !== null) {
+                $tasks->where('user_id', '=',$userId);
+            }
+        }
+//        dd($tasks);
+        $status ='';
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            if ($status !== null) {
+                $tasks->where('status','like','%' . $status);
+            }
+        }
+
+          $tasks = $tasks->orderBy('deadline','asc')->paginate(10);
+//        dd($tasks);
+        return view('tasks.index', compact('tasks','users','userId', 'status','taskDesc'));
     }
 
     /**
