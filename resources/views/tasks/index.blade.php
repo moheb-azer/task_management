@@ -48,12 +48,15 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @php
+                        $rowNumber = ($tasks->currentPage() - 1) * $tasks->perPage() + 1;
+                    @endphp
                     @foreach($tasks as $task)
                         @php
                             $today = \Carbon\Carbon::now()->toDateString();
                         @endphp
-                    <tr class="{{$task->deadline <= today() && $task->status !== 'Done' ? 'text-danger' : '' }}">
-                        <th scope="row" class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task-> id}}</th>
+                    <tr>
+                        <th scope="row" class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$rowNumber++}}</th>
                         <td class="{{$task->deadline <= today() && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task->task}}</td>
                         <td class="{{$task->deadline <= today() && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task->status}}</td>
                         <td class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task->users->name}}</td>

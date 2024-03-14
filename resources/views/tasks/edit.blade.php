@@ -25,7 +25,7 @@
                             <select class="form-select" name="status">
                                 <option value="Todo" @if($task->status == "Todo")selected @endif>Todo</option>
                                 <option value="In progress"@if($task->status == "In progress")selected @endif >In progress</option>
-                                <option value="Done" @if($task->status == "Done")selected @endif>Done</option>
+                                <option value="Done" @if($task->status == "Done") selected @endif>Done</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -36,6 +36,10 @@
                                 <option value="{{$user->id}}" @selected($user->id == $task->users->id)>{{$user->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Deadline</label>
+                            <input type="date" name="deadline" id="deadline" class="form-control" value="{{$task->deadline}}">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Update</button>

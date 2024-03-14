@@ -29,6 +29,10 @@
 
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="deadline">Deadline</label>
+                            <input type="date" name="deadline" id="deadline" class="form-control">
+                        </div>
                     <div class="col-md-8">
                         <h2>Comments</h2>
                         @foreach($comments as $comment)

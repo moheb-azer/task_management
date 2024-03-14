@@ -64,6 +64,7 @@ class TaskController extends Controller
         $task -> task =$request['task'];
         $task -> status =$request['status'];
         $task -> user_id =$request['user_id'];
+        $task -> deadline =$request['deadline'];
         $task->save();
         return redirect()->route('tasks.index');
     }
@@ -84,6 +85,7 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $users = User::all();
+//        dd($task);
         return view('tasks.edit', compact('task','users'));
     }
 
@@ -97,6 +99,7 @@ class TaskController extends Controller
         $task -> task =$request['task'];
         $task -> status =$request['status'];
         $task -> user_id =$request['user_id'];
+        $task -> deadline =$request['deadline'];
         // Add more attributes as needed
         // Save the updated task
         $task->save();

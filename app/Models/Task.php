@@ -11,6 +11,7 @@ class Task extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = [
+
         'created_at',
         'updated_at',
         'deleted_at',
@@ -18,10 +19,11 @@ class Task extends Model
     public const STATUS_SELECT = [
         'Todo',
         'In progress',
-        'Done'
+        'Done',
     ];
     protected $fillable = [
         'task',
+        'deadline',
         ];
 
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsTo

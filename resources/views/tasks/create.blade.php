@@ -30,10 +30,15 @@
                         <div class="form-group">
                             <lable>Assigned to :</lable>
                             <select class="form-select" name="user_id">
+                                <option selected value="" >Select User</option>
                                 @foreach($users as $user)
-                                <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Deadline</label>
+                            <input type="date" name="deadline" id="deadline" class="form-control">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
