@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -39,7 +38,11 @@
                         </div>
                         <div class="form-group">
                             <label for="deadline">Deadline</label>
-                            <input type="date" name="deadline" id="deadline" class="form-control" value="{{$task->deadline}}">
+                            <?php
+                            use Carbon\Carbon;
+                            $deadlineFormatted = Carbon::parse($task->deadline)->format('Y-m-d')
+                            ?>
+                            <input type="date" name="deadline" id="deadline" class="form-control" value="{{$deadlineFormatted}}">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Update</button>

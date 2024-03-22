@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskCreated;
 use App\Models\Comment;
 use App\Models\Task;
 use App\Models\User;
@@ -66,6 +67,7 @@ class TaskController extends Controller
         $task -> user_id =$request['user_id'];
         $task -> deadline =$request['deadline'];
         $task->save();
+        broadcast(new TaskCreated($task));
         return redirect()->route('tasks.index');
     }
 

@@ -52,8 +52,10 @@
                         $rowNumber = ($tasks->currentPage() - 1) * $tasks->perPage() + 1;
                     @endphp
                     @foreach($tasks as $task)
+
                         @php
                             $today = \Carbon\Carbon::now()->toDateString();
+                            $deadlineFormatted = \Carbon\Carbon::parse($task->deadline)->format('Y-m-d')
                         @endphp
                     <tr>
                         <th scope="row" class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$rowNumber++}}</th>
@@ -61,7 +63,7 @@
                         <td class="{{$task->deadline <= today() && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task->status}}</td>
                         <td class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">{{$task->users->name}}</td>
                         <td class="{{$task->deadline <= $today && $task->status !== 'Done' ? 'text-danger' : '' }}">
-                            {{$task->deadline}}</td>
+                            {{$deadlineFormatted}}</td>
                         <td >
 {{--                            <a type="button" class="btn btn-success" href="/task/{{$task->id}}">View</a>--}}
                             <a type="button" class="btn btn-outline-success" href="{{route('tasks.show',$task->id)}}">View</a>

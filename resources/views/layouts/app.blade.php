@@ -81,5 +81,14 @@
             @yield('content')
         </main>
     </div>
+
+
+    <script>
+        window.Echo.channel('task-created-channel')
+            .listen('.App\\Events\\TaskCreated', (event) => {
+                alert('A new task has been assigned to you.');
+            });
+    </script>
+
 </body>
 </html>

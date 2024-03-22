@@ -31,7 +31,11 @@
                         </div>
                         <div class="form-group">
                             <label for="deadline">Deadline</label>
-                            <input type="date" name="deadline" id="deadline" class="form-control">
+                            <?php
+                            use Carbon\Carbon;
+                            $deadlineFormatted = Carbon::parse($task->deadline)->format('Y-m-d')
+                            ?>
+                            <input disabled type="date" name="deadline" id="deadline" class="form-control" value="{{$deadlineFormatted}}">
                         </div>
                     <div class="col-md-8">
                         <h2>Comments</h2>
