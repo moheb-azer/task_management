@@ -66,15 +66,15 @@
                             {{$deadlineFormatted}}</td>
                         <td >
 {{--                            <a type="button" class="btn btn-success" href="/task/{{$task->id}}">View</a>--}}
-                            <a type="button" class="btn btn-outline-success" href="{{route('tasks.show',$task->id)}}">View</a>
+                            <a type="button" class="btn btn-outline-success p-1" href="{{route('tasks.show',$task->id)}}">View</a>
 {{--                            <a type="button" class="btn btn-primary" href="/task/{{$task->id}}/edit">Edit</a>--}}
-                            <a type="button" class="btn btn-outline-primary" href="{{route('tasks.edit',$task->id)}}">Edit</a>
+                            <a type="button" class="btn btn-outline-primary p-1" href="{{route('tasks.edit',$task->id)}}">Edit</a>
 
                             <form action="{{ route('tasks.destroy',$task->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
 {{--                            <a type="button" class="btn btn-danger" href="{{route('tasks.destroy',$task->id)}}">Delete</a>--}}
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger p-1">Delete</button>
                             </form>
                         </td>
                     </tr>

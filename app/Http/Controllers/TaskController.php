@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\TaskCreated;
 use App\Models\Comment;
 use App\Models\Task;
 use App\Models\User;
+use App\Notifications\TaskAssignedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
 {
@@ -67,7 +68,8 @@ class TaskController extends Controller
         $task -> user_id =$request['user_id'];
         $task -> deadline =$request['deadline'];
         $task->save();
-        broadcast(new TaskCreated($task));
+        $user = User::find($request['user_id']);
+        Notification::send($user, new TaskAssignedNotification($task));
         return redirect()->route('tasks.index');
     }
 
